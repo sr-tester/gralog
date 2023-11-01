@@ -69,6 +69,8 @@ public class Vertex extends XmlMarshallable implements IMovable, Serializable {
     Set<Edge> outgoingEdges;
     Set<Edge> incomingEdges;
     Set<Edge> incidentEdges; // in directed graphs: outgoing and incoming
+    @DataField(display = false)
+    public boolean visited = false; // Indicates whether the vertex has been visited in the Ford-Fulkerson algorithm
 
 
     public Vertex() {
@@ -276,6 +278,13 @@ public class Vertex extends XmlMarshallable implements IMovable, Serializable {
 
     public int getInDegree() {
         return incomingEdges.size();
+    }
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 //##########START depricated!!!! use getNeighbours instead#########
 
