@@ -34,9 +34,9 @@ public class FordFulkersonAlgorithm extends Algorithm {
 
         while (!queue.isEmpty()) {
             Vertex node = queue.poll();
-            for (Edge edge : structure.getEdges(node)) {
-                Vertex neighbour = edge.getOtherEndpoint(node);
-                if (!parent.containsKey(neighbour) && edge.getCapacity() > 0) {
+            for (Edge edge : structure.getIncidentEdges(node)) {
+                Vertex neighbour = edge.getSource() == node ? edge.getTarget() : edge.getSource();
+                if (!parent.containsKey(neighbour) && edge.getWeight() > 0) {
                     parent.put(neighbour, edge);
                     if (neighbour == sink) {
                         return parent;
@@ -50,16 +50,16 @@ public class FordFulkersonAlgorithm extends Algorithm {
 
     private double findPathCapacity(Map<Vertex, Edge> augmentingPath, Vertex sink) {
         double pathCapacity = Double.MAX_VALUE;
-        for (Vertex node = sink; augmentingPath.get(node) != null; node = augmentingPath.get(node).getOtherEndpoint(node)) {
-            pathCapacity = Math.min(pathCapacity, augmentingPath.get(node).getCapacity());
+        for (Vertex node = sink; augmentingPath.get(node) != null; node = augmentingPath.get(node).getSource() == node ? augmentingPath.get(node).getTarget() : augmentingPath.get(node).getSource()) {
+            pathCapacity = Math.min(pathCapacity, augmentingPath.get(node).getWeight());
         }
         return pathCapacity;
     }
 
     private void updateResidualGraph(Map<Vertex, Edge> augmentingPath, Vertex sink, double pathCapacity) {
-        for (Vertex node = sink; augmentingPath.get(node) != null; node = augmentingPath.get(node).getOtherEndpoint(node)) {
+        for (Vertex node = sink; augmentingPath.get(node) != null; node = augmentingPath.get(node).getSource() == node ? augmentingPath.get(node).getTarget() : augmentingPath.get(node).getSource()) {
             Edge edge = augmentingPath.get(node);
-            edge.setCapacity(edge.getCapacity() - pathCapacity);
+            edge.setWeight(edge.getWeight() - pathCapacity);
             Edge reverseEdge = edge.getReverseEdge();
             if (reverseEdge != null) {
                 reverseEdge.setCapacity(reverseEdge.getCapacity() + pathCapacity);
