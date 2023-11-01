@@ -68,3 +68,12 @@ public abstract class Algorithm {
 
 
 }
+    public static Algorithm getAlgorithm(String algorithmName) {
+        switch (algorithmName) {
+            case "FordFulkersonAlgorithm":
+                return new FordFulkersonAlgorithm();
+            // Add more cases as needed for other algorithms
+            default:
+                return null;
+        }
+    }
