@@ -41,6 +41,26 @@ public class Edge extends XmlMarshallable implements IMovable, Serializable {
         SHARP,
         //ROUND, // TODO: choosing this in object inspector makes the edge invisible
         BEZIER
+    public double getWeight() {
+        return this.weight;
+    }
+    
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+    
+    public Edge getReverseEdge() {
+        Edge reverseEdge = new Edge();
+        reverseEdge.setSource(this.target);
+        reverseEdge.setTarget(this.source);
+        reverseEdge.setWeight(this.weight);
+        return reverseEdge;
+    }
+    
+    public double getCapacity() {
+        // Assuming capacity is the same as weight for this context
+        return this.weight;
+    }
     }
     public static double edgeSelectionOffset = 0.02;
     public static double multiEdgeOffset = 0.2;
@@ -755,4 +775,6 @@ public class Edge extends XmlMarshallable implements IMovable, Serializable {
         return ret;
 
     }
-}
+            return this.weight;
+        }
+    }
