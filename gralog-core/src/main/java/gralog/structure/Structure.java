@@ -521,6 +521,15 @@ public abstract class Structure<V extends Vertex, E extends Edge>
     public V getVertexById(int id) {
         return vertices.get(id);
     }
+    public List<Edge> getIncidentEdges(Vertex node) {
+        List<Edge> incidentEdges = new ArrayList<>();
+        for (Edge edge : edges.values()) {
+            if (edge.getSource().equals(node) || edge.getTarget().equals(node)) {
+                incidentEdges.add(edge);
+            }
+        }
+        return incidentEdges;
+    }
 
     /**
      * Removes vertex from the structure for a given ID. You can remove by
