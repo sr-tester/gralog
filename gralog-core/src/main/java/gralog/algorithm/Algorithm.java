@@ -7,6 +7,7 @@ import gralog.structure.Highlights;
 import gralog.structure.Structure;
 import gralog.structure.Vertex;
 
+import gralog.algorithm.FordFulkersonAlgorithm;
 import java.lang.reflect.Method;
 import java.util.Set;
 
