@@ -29,6 +29,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import gralog.annotations.NotNull;
+import gralog.annotations.Nullable;
 import java.util.Set;
 
 /**
@@ -68,6 +70,13 @@ public class Edge extends XmlMarshallable implements IMovable, Serializable {
     public GralogGraphicsContext.LineType type = GralogGraphicsContext.LineType.PLAIN;
     @DataField(display = true)
     public EdgeType edgeType = EdgeType.BEZIER; //TODO: switch to private and use annotations to mark insp vars
+    @DataField(display = true)
+    @NotNull
+    public Integer capacity = 0; // The capacity of the edge
+    
+    @DataField(display = true)
+    @NotNull
+    public Integer flow = 0; // The flow of the edge
     public ArrayList<Edge> siblings = new ArrayList<>();
     public ArrayList<EdgeIntermediatePoint> intermediatePoints = new ArrayList<>();
     public ArrayList<ControlPoint> controlPoints = new ArrayList<>();
@@ -182,6 +191,21 @@ public class Edge extends XmlMarshallable implements IMovable, Serializable {
             return addSharpControlPoint(position, clickPosition);
         }
     }
+public Integer getCapacity() {
+    return capacity;
+}
+
+public void setCapacity(@NotNull Integer capacity) {
+    this.capacity = capacity;
+}
+
+public Integer getFlow() {
+    return flow;
+}
+
+public void setFlow(@NotNull Integer flow) {
+    this.flow = flow;
+}
 
     public int getId() {
         return this.id;
