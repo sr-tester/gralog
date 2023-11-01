@@ -775,44 +775,6 @@ public class Edge extends XmlMarshallable implements IMovable, Serializable {
         return ret;
 
     }
-        public double getWeight() {
-            return this.weight;
-        }
-    
-        public void setWeight(double weight) {
-            this.weight = weight;
-        }
-    
-        public Edge getReverseEdge() {
-            Edge reverseEdge = new Edge();
-            reverseEdge.setSource(this.target);
-            reverseEdge.setTarget(this.source);
-            reverseEdge.setWeight(this.weight);
-            return reverseEdge;
-        }
-    
-        public double getCapacity() {
-            // Assuming capacity is the same as weight for this context
-            return this.weight;
-        }
-        public double getWeight() {
-            return this.weight;
-        }
-    
-        public void setWeight(double weight) {
-            this.weight = weight;
-        }
-    
-        public Edge getReverseEdge() {
-            Edge reverseEdge = new Edge();
-            reverseEdge.setSource(this.target);
-            reverseEdge.setTarget(this.source);
-            reverseEdge.setWeight(this.weight);
-            return reverseEdge;
-        }
-    
-        public double getCapacity() {
-            // Assuming capacity is the same as weight for this context
             return this.weight;
         }
     }
